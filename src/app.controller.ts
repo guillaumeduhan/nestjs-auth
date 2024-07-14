@@ -1,19 +1,27 @@
 import { AuthService } from '@/auth/auth.service';
-import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
-import { LocalAuthGuard } from '@/auth/local-auth.guard';
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+
+import { SetMetadata } from '@nestjs/common';
+import { SupabaseGuard } from './auth/supabase/supabase.guard';
+
+export const IS_PUBLIC_KEY = 'isPublic';
+export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 
 @Controller()
 export class AppController {
   constructor(private authService: AuthService) { }
 
-  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    return this.authService.login(req.body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Post('auth/signup')
+  async signup(@Request() req) {
+    return this.authService.signUp(req.body);
+  }
+
+  @UseGuards(SupabaseGuard)
   @Get('me')
   getProfile(@Request() req) {
     return req.user;
