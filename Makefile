@@ -1,3 +1,8 @@
+gt:
+	git add .
+	git commit -m "commit"
+	git push
+
 dev:
 	npm run start:dev
 
