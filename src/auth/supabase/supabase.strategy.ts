@@ -1,4 +1,4 @@
-import { IS_PUBLIC_KEY } from '@/app.controller';
+import { IS_PUBLIC_KEY } from '@/auth/auth.controller';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';

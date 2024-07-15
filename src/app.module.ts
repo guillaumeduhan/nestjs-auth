@@ -1,9 +1,11 @@
+import { OrganizationsModule } from '@/routes';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
+import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { SupabaseModule } from './auth/supabase/supabase.module';
-import { UsersModule } from './users/users.module';
+import { OrganizationsController } from './routes/organizations/organizations.controller';
 
 @Module({
   imports: [
@@ -12,10 +14,14 @@ import { UsersModule } from './users/users.module';
       isGlobal: true,
     }),
     AuthModule,
-    UsersModule,
-    SupabaseModule
+    SupabaseModule,
+    OrganizationsModule
   ],
-  controllers: [AppController],
+  controllers: [
+    AppController,
+    AuthController,
+    OrganizationsController
+  ],
   providers: [],
 })
 export class AppModule { }
